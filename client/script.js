@@ -81,17 +81,23 @@ sayHelloButton.addEventListener('click',sayHello)
 */ 
 
 const ohMy = () => {
-    axios.get('http://localhost:3000/animals').then
-    ((res) => {
-        console.log(res.data)
-        // for(let i = 0;i < res.data.length;i++){
-        //     document.createElement(("p"))
-        // }
-    }).catch(err => console.log(err))
+    // YOUR CODE HERE
+    axios.get('http://localhost:3000/animals')
+    .then(res => {
+        // console.log(res.data)
+        let bodyHTML = document.querySelector('body');
+        for (let i = 0; i < res.data.length; i++) {
+            let newElement = document.createElement('p');
+            newElement.textContent = res.data[i];
+            bodyHTML.appendChild(newElement);
+        }
+    })
+    .catch(error => {
+        console.log(error)
+    })
 }
 
 document.getElementById('animals-button').addEventListener('click', ohMy)
-
 
 
 
@@ -143,10 +149,15 @@ document.querySelector('#repeat-text').textContent === repeatMyParam.data
 */
 
 // CODE HERE
+//problem 10: came out as 'you sent an empty query'
+//problem 10: came out as 'you sent more than one query'
 const getRequest = () => {
     axios.get('http://localhost:3000/query-test/?name=mason').then(res => {
         console.log(res)
     })
+    axios.get('http://localhost:3000/query-test/?name=maag').then(res => {
+        console.log(res)
+    }) 
 }
 
 document.querySelector('#query-button').addEventListener("click", getRequest)
